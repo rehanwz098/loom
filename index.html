@@ -1,1 +1,1234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbffa8">
+<meta name="description" content="Loom: handmade crochet bags, accessories, home pieces and more, made to order in your colours.">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Loom Handcrafted Designs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap">
+<script>
+(function () {
+  var r = document.documentElement;
+  r.classList.add('js');
+  var rm = false;
+  try { rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  if (rm) r.classList.add('rm'); else r.classList.add('intro-lock');
+  // failsafe: never leave the visitor stuck behind the intro
+  setTimeout(function () {
+    var i = document.getElementById('intro'); if (i) i.remove();
+    r.classList.remove('intro-lock'); r.classList.add('ready');
+  }, 7000);
+})();
+</script>
+<style>
+/* Layout concept: a plain butter-yellow page.
+   Arch-framed photography, hairline rules, light high-contrast serif, spaced small caps for everything functional.
+   One bold moment: the logo intro that opens like a seam being unpicked. */
+:root {
+  --butter: #fbffa8;
+  --butter-pale: #fdffd2;
+  --butter-deep: #f0f48c;
+  --maroon: #700000;
+  --ink: #4a0000;
+  --yarn: #965245;
+  --blush: #e7c3b8;
+  --hair: rgba(112, 0, 0, 0.34);
+  --hair-soft: rgba(112, 0, 0, 0.16);
+  --wa: #25d366;
+  --display: 'Cormorant Garamond', 'Cormorant', Garamond, 'Times New Roman', serif;
+  --body: 'Jost', Futura, 'Century Gothic', 'Segoe UI', system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+html.intro-lock { overflow: hidden; }
+body {
+  background: var(--butter);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  overflow-x: clip;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--butter); }
+::selection { background: var(--maroon); color: var(--butter); }
+.wrap { max-width: 1240px; margin: 0 auto; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--maroon); outline-offset: 3px; }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 400; line-height: 1; margin: 0; color: var(--maroon); text-wrap: balance; }
+p { margin: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.eyebrow { font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 500; color: var(--yarn); }
 
+/* scroll progress */
+.progress { position: fixed; left: 0; right: 0; top: env(safe-area-inset-top, 0px); height: 3px; z-index: 70; pointer-events: none; --p: 0; }
+.progress i { position: absolute; inset: 0; background: var(--maroon); transform-origin: left center; transform: scaleX(var(--p)); }
+.progress b { position: absolute; top: 50%; left: calc(var(--p) * (100% - 20px)); width: 20px; height: 20px; margin-top: -10px; border-radius: 50%; overflow: hidden; opacity: 0; transition: opacity 0.3s;
+  background: radial-gradient(circle at 34% 30%, #c98274, #965245 55%, #6a2f27); box-shadow: 0 0 0 1.5px var(--maroon); transform: rotate(calc(var(--p) * 2160deg)); }
+.progress b::before { content: ""; position: absolute; inset: -4px; background: repeating-linear-gradient(58deg, transparent 0 4px, rgba(74, 0, 0, 0.5) 4px 5.4px); }
+.progress.on b { opacity: 1; }
+
+/* intro */
+#intro { position: fixed; inset: 0; z-index: 200; cursor: pointer; }
+#intro .pn { position: absolute; left: 0; right: 0; height: 50.3%; background-color: var(--butter); transition: transform 1.05s cubic-bezier(0.76, 0, 0.24, 1) 0.18s; }
+#intro .t { top: 0; } #intro .b { bottom: 0; }
+#intro.open .t { transform: translateY(-101%); } #intro.open .b { transform: translateY(101%); }
+#intro .stage { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; transition: opacity 0.4s; }
+#intro.open .stage { opacity: 0; }
+.i-ball { width: clamp(92px, 22vw, 124px); height: auto; opacity: 0; animation: ballIn 1.15s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s forwards; }
+@keyframes ballIn { from { opacity: 0; transform: translateY(-50px) rotate(-100deg) scale(0.7); } to { opacity: 1; transform: none; } }
+.i-word { width: clamp(220px, 54vw, 330px); clip-path: inset(0 100% 0 0); animation: wipe 1.1s cubic-bezier(0.7, 0, 0.2, 1) 0.95s forwards; }
+.i-word img { width: 100%; height: auto; }
+@keyframes wipe { to { clip-path: inset(0 0 0 0); } }
+.th { width: clamp(220px, 54vw, 330px); height: auto; overflow: visible; }
+.th path { fill: none; stroke: var(--yarn); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 1.4s cubic-bezier(0.6, 0.1, 0.2, 1) 0.5s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.i-tag { opacity: 0; font-size: 0.68rem; letter-spacing: 0.45em; text-transform: uppercase; color: var(--yarn); font-weight: 500; animation: fade 0.8s ease 1.75s forwards; margin-top: 0.4rem; }
+@keyframes fade { to { opacity: 1; } }
+
+/* hero entrance (home + page heads) */
+.js .ha { opacity: 0; }
+.ready .ha { animation: rise 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--i, 0) * 110ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+.js .rv { opacity: 0; transform: translateY(28px); transition: opacity 1s ease, transform 1s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.js .rv.in { opacity: 1; transform: none; }
+
+/* header */
+.site-head { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(251, 255, 168, 0.9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.head-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--hair); }
+.nav { display: flex; gap: 1.8rem; justify-self: start; }
+.nav a { position: relative; text-decoration: none; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; padding: 0.4rem 0; }
+.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--maroon); transform: scaleX(0); transform-origin: left; transition: transform 0.35s; }
+.nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+.brand { justify-self: center; display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.brand .b-word { width: 112px; height: auto; }
+.brand .b-ball { width: 42px; height: auto; }
+.head-actions { justify-self: end; display: flex; align-items: center; gap: 1.1rem; }
+.icon-btn { display: grid; place-items: center; width: 38px; height: 38px; color: var(--maroon); text-decoration: none; border-radius: 50%; transition: background 0.2s; }
+.icon-btn:hover { background: var(--butter-deep); }
+.cart-btn { display: inline-flex; align-items: center; gap: 0.6rem; background: none; border: 0; padding: 0.4rem 0; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; color: var(--maroon); }
+.cart-btn .count { display: grid; place-items: center; min-width: 1.5rem; height: 1.5rem; padding: 0 0.3rem; border: 1px solid var(--maroon); border-radius: 50%; font-size: 0.72rem; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.cart-btn:hover .count { background: var(--maroon); color: var(--butter); }
+@media (max-width: 760px) {
+  .head-in { grid-template-columns: 1fr auto; grid-template-areas: "brand actions" "nav nav"; row-gap: 0.4rem; }
+  .brand { grid-area: brand; justify-self: start; } .brand .b-word { width: 96px; } .brand .b-ball { width: 36px; }
+  .head-actions { grid-area: actions; gap: 0.4rem; }
+  .nav { grid-area: nav; justify-self: stretch; justify-content: space-between; gap: 0.5rem; border-top: 1px solid var(--hair-soft); padding-top: 0.2rem; }
+}
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 1.05rem 2rem; border: 1px solid var(--maroon); background: var(--maroon); color: var(--butter); font-family: var(--body); font-size: 0.72rem; font-weight: 500; line-height: 1; letter-spacing: 0.24em; text-transform: uppercase; text-decoration: none; text-align: center; transition: background 0.3s, color 0.3s; }
+.btn:hover { background: transparent; color: var(--maroon); }
+.btn.ghost { background: transparent; color: var(--maroon); }
+.btn.ghost:hover { background: var(--maroon); color: var(--butter); }
+.btn.sm { padding: 0.8rem 1.2rem; font-size: 0.66rem; }
+.btn.wa { background: #0f7a3f; border-color: #0f7a3f; color: #fff; }
+.btn.wa:hover { background: transparent; color: #0f7a3f; }
+.btn[aria-disabled="true"] { opacity: 0.5; }
+.link-arrow { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; text-decoration: none; border-bottom: 1px solid var(--maroon); padding-bottom: 4px; }
+.link-arrow:hover { color: var(--yarn); border-color: var(--yarn); }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; padding-block: clamp(2.2rem, 5vw, 4.5rem); }
+.hero h1 { font-size: clamp(2.5rem, 5.2vw, 4.4rem); font-weight: 300; line-height: 1; letter-spacing: -0.015em; margin: 1.2rem 0 0.9rem; }
+.hero h1 em { font-style: italic; font-weight: 400; }
+.hero .lead { font-size: 1.05rem; max-width: 30rem; font-weight: 300; }
+.hero .cta { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 2.2rem; }
+.h-thread { display: block; width: min(24rem, 78%); height: 18px; margin: 0 0 1.5rem; overflow: visible; }
+.h-thread path { fill: none; stroke: var(--maroon); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.ready .h-thread path { animation: drawT 1.8s .9s cubic-bezier(.5,.1,.2,1) forwards; }
+@keyframes drawT { to { stroke-dashoffset: 0; } }
+.newin { margin-top: 2.4rem; padding-top: 1.3rem; border-top: 1px solid var(--hair-soft); }
+.newin .eyebrow { display: block; margin-bottom: 0.9rem; }
+.newin-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 176px), 1fr)); gap: 0.7rem; }
+.mini { display: flex; align-items: center; gap: 0.75rem; text-align: left; border: 1px solid var(--hair); background: var(--butter-pale); padding: 0.4rem 0.8rem 0.4rem 0.4rem; min-width: 0; transition: border-color .25s, transform .25s; }
+.mini:hover { border-color: var(--maroon); transform: translateY(-2px); }
+.mini img { width: 52px; height: 52px; object-fit: cover; flex: none; border-radius: 50% 50% 0 0; background: var(--blush); }
+.mini b { display: block; font-family: var(--display); font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; line-height: 1.2; }
+.mini small { display: block; font-size: 0.78rem; color: var(--yarn); margin-top: 2px; }
+.skeins { display: flex; align-items: center; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.6rem; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; color: var(--yarn); }
+.skeins .dots { display: flex; }
+.skeins i { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--butter); margin-left: -6px; box-shadow: 0 0 0 1px var(--hair); }
+.skeins i:first-child { margin-left: 0; }
+.facts-row { display: flex; flex-wrap: wrap; gap: 0.6rem 1.8rem; margin-top: 2.6rem; padding-top: 1.2rem; border-top: 1px solid var(--hair-soft); font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; color: var(--yarn); }
+.collage { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; padding: 8px; }
+.collage .col { display: grid; gap: 16px; min-width: 0; }
+.collage .col + .col { margin-top: clamp(2rem, 6vw, 4.5rem); }
+.frame { position: relative; overflow: hidden; background: var(--blush); outline: 1px solid var(--hair); outline-offset: 6px; }
+.frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ready .frame img { animation: settle 2s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes settle { from { transform: scale(1.18); } to { transform: scale(1); } }
+.f-arch { aspect-ratio: 3 / 4; border-radius: 999px 999px 0 0; }
+.f-circle { aspect-ratio: 1; border-radius: 50%; }
+.f-tall { aspect-ratio: 4 / 5; border-radius: 0 0 999px 999px; }
+.f-arch2 { aspect-ratio: 3 / 4; border-radius: 999px 999px 0 0; }
+.stamp { position: absolute; left: 50%; top: 56%; width: clamp(92px, 15vw, 128px); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: var(--butter-pale); border: 1px solid var(--maroon); display: grid; place-items: center; z-index: 2; }
+.stamp svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 36s linear infinite; }
+.stamp text { font-family: var(--body); font-size: 7.2px; letter-spacing: 1px; font-weight: 500; fill: var(--maroon); text-transform: uppercase; }
+.stamp img { width: 34%; height: auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; } .collage { max-width: 520px; margin-inline: auto; width: 100%; } }
+
+/* marquee */
+.marquee { width: 100vw; margin-left: calc(50% - 50vw); background: var(--maroon); color: var(--butter); overflow: hidden; padding: 1.05rem 0; }
+.marquee .track { display: flex; width: max-content; animation: slide 46s linear infinite; }
+.marquee span { font-family: var(--display); font-style: italic; font-size: clamp(1.3rem, 3vw, 1.8rem); white-space: nowrap; padding: 0 1.4rem; }
+.marquee i { align-self: center; width: 7px; height: 7px; border-radius: 50%; background: var(--blush); flex: none; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* sections */
+.section { padding-block: clamp(3.5rem, 8vw, 7rem) 0; }
+.section-head { display: flex; align-items: end; justify-content: space-between; gap: 1.2rem; flex-wrap: wrap; margin-bottom: clamp(1.8rem, 4vw, 3rem); }
+.section-head .eyebrow { display: block; margin-bottom: 1rem; }
+.section-head h2 { font-size: clamp(2rem, 4.4vw, 3.3rem); font-weight: 300; letter-spacing: -0.01em; }
+.section-head h2 em { font-style: italic; }
+
+/* cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 3.2rem 1.7rem; }
+.grid.four { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+.card { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.card-open { display: flex; flex-direction: column; justify-content: flex-start; gap: 1rem; flex: 1 1 auto; width: 100%; padding: 0; border: 0; background: none; text-align: left; }
+.ph { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--blush); }
+.ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.7s ease, transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.ph .alt { opacity: 0; }
+.card-open:hover .ph .alt, .card-open:focus-visible .ph .alt { opacity: 1; }
+.card-open:hover .ph img { transform: scale(1.045); }
+.ph::after { content: ""; position: absolute; inset: 10px; border: 1px dashed rgba(253, 255, 210, 0.85); pointer-events: none; }
+.card-row { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+.card .nm { display: block; font-family: var(--display); color: var(--maroon); font-size: 1.2rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.25; }
+.card .var { display: block; font-size: 0.68rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--yarn); margin-top: 0.35rem; font-weight: 500; }
+.price { font-size: 0.95rem; font-weight: 500; letter-spacing: 0.06em; color: var(--maroon); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.opts-line { font-size: 0.8rem; color: var(--yarn); margin-top: -0.4rem; }
+
+/* categories */
+.cat-list { border-top: 1px solid var(--hair); }
+.cat-row { display: grid; grid-template-columns: 56px 1fr auto 24px; align-items: center; gap: 1.4rem; padding: 0.8rem 0.2rem; border-bottom: 1px solid var(--hair); text-decoration: none; transition: background 0.3s, padding 0.3s; }
+.cat-row:hover { background: var(--butter-pale); padding-inline: 1rem; }
+.cat-row .th-c { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background: var(--blush); display: grid; place-items: center; outline: 1px solid var(--hair); outline-offset: 3px; }
+.cat-row .th-c img { width: 100%; height: 100%; object-fit: cover; }
+.cat-row .th-c img.ball { width: 52%; height: auto; object-fit: contain; }
+.cat-name { font-family: var(--display); font-size: clamp(1.2rem, 2.4vw, 1.65rem); font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--maroon); line-height: 1.2; }
+.cat-meta { font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; color: var(--yarn); }
+.cat-arrow { font-size: 1.4rem; color: var(--maroon); transition: transform 0.3s; }
+.cat-row:hover .cat-arrow { transform: translateX(6px); }
+@media (max-width: 560px) { .cat-row { grid-template-columns: 46px 1fr 20px; gap: 1rem; } .cat-row .th-c { width: 46px; height: 46px; } .cat-name { letter-spacing: 0.14em; } .cat-meta { display: none; } }
+
+/* story band */
+.band { background: var(--maroon); color: var(--butter); padding: clamp(2rem, 6vw, 5rem); display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.band .eyebrow { color: var(--blush); display: block; margin-bottom: 1.2rem; }
+.band h2 { color: var(--butter); font-size: clamp(2.3rem, 5.4vw, 4.2rem); font-weight: 300; line-height: 1.02; }
+.band h2 em { font-style: italic; }
+.facts { display: grid; gap: 0; margin-top: 2.4rem; }
+.facts div { display: grid; grid-template-columns: 10rem 1fr; gap: 1.2rem; border-top: 1px solid rgba(251, 255, 168, 0.3); padding-block: 1.1rem; }
+.facts h3 { color: var(--butter); font-size: 1.4rem; font-weight: 500; line-height: 1.1; }
+.facts p { color: var(--butter-pale); font-size: 0.95rem; font-weight: 300; }
+.band-img { position: relative; aspect-ratio: 3 / 4; border-radius: 999px 999px 0 0; overflow: hidden; outline: 1px solid rgba(251, 255, 168, 0.5); outline-offset: 8px; max-width: 340px; width: 100%; justify-self: center; background: #2a0000; }
+.band-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 900px) { .band { grid-template-columns: 1fr; } .band-img { order: -1; max-width: 260px; } .facts div { grid-template-columns: 1fr; gap: 0.3rem; } }
+
+
+.insta { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; padding-block: 2rem; }
+.insta h2 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; }
+.ig-glyph { display: inline-grid; place-items: center; width: 52px; height: 52px; border-radius: 15px; background: linear-gradient(45deg, #f9a43a, #e1306c 55%, #7a3fd1); color: #fff; flex: none; }
+
+/* page heads, filters */
+.page-head { padding-block: clamp(2.5rem, 6vw, 5rem) 1.5rem; }
+.page-head h1 { font-size: clamp(2.3rem, 5.4vw, 4rem); font-weight: 300; letter-spacing: -0.02em; margin: 1.2rem 0; }
+.page-head p.t { max-width: 36rem; font-weight: 300; }
+.filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1.6rem 0 3rem; padding-block: 1rem; border-top: 1px solid var(--hair-soft); border-bottom: 1px solid var(--hair-soft); }
+.filters button { padding: 0.7rem 1.1rem; border: 1px solid transparent; background: none; font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; color: var(--maroon); }
+.filters button:hover { border-color: var(--hair); }
+.filters button[aria-pressed="true"] { background: var(--maroon); color: var(--butter); }
+.filters .n { opacity: 0.65; margin-left: 0.4rem; }
+.soon { border: 1px dashed var(--hair); padding: clamp(2rem, 5vw, 3.5rem); text-align: center; background: var(--butter-pale); }
+.soon h3 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 300; margin-bottom: 0.7rem; }
+.soon p { max-width: 30rem; margin: 0 auto 1.6rem; font-weight: 300; }
+.soon-list { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--hair-soft); display: flex; gap: 0.6rem 1.8rem; flex-wrap: wrap; align-items: center; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; color: var(--yarn); }
+
+/* modal */
+.scrim { position: fixed; inset: 0; background: rgba(74, 0, 0, 0.55); z-index: 80; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+.modal { position: fixed; z-index: 90; inset: 0; display: grid; place-items: center; pointer-events: none; padding: max(12px, env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) max(12px, env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); }
+.modal-card { pointer-events: auto; position: relative; background: var(--butter); border: 1px solid var(--maroon); width: min(1060px, 100%); max-height: 100%; overflow: auto; padding: clamp(1rem, 3vw, 2rem); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1.4rem, 3vw, 2.6rem); }
+.close-x { position: absolute; top: 0.7rem; right: 0.7rem; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--maroon); background: var(--butter); font-size: 1.4rem; line-height: 1; z-index: 3; color: var(--maroon); }
+.close-x:hover { background: var(--maroon); color: var(--butter); }
+.gallery { min-width: 0; }
+.thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-top: 0.7rem; }
+.thumbs button { padding: 0; border: 1px solid var(--hair-soft); overflow: hidden; aspect-ratio: 1; background: var(--blush); opacity: 0.7; }
+.thumbs button[aria-current="true"] { border-color: var(--maroon); opacity: 1; outline: 1px solid var(--maroon); outline-offset: 2px; }
+.thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.detail { min-width: 0; display: flex; flex-direction: column; gap: 1.2rem; padding-top: 0.3rem; }
+.detail h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.15; padding-right: 3rem; }
+.detail .price { font-size: 1.25rem; }
+.detail .desc { font-weight: 300; }
+.opt { border-top: 1px solid var(--hair-soft); padding-top: 1rem; }
+.opt-head { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; margin-bottom: 0.7rem; flex-wrap: wrap; }
+.opt-head b { font-size: 0.7rem; letter-spacing: 0.26em; text-transform: uppercase; font-weight: 500; }
+.opt-head span { font-size: 0.85rem; color: var(--yarn); }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip { padding: 0.65rem 1rem; border: 1px solid var(--maroon); background: transparent; font-size: 0.85rem; font-weight: 400; color: var(--maroon); text-align: left; transition: background 0.2s, color 0.2s; }
+.chip small { opacity: 0.75; font-size: 0.78rem; margin-left: 0.5rem; }
+.chip:hover { background: var(--butter-deep); }
+.chip[aria-pressed="true"] { background: var(--maroon); color: var(--butter); }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 0.6rem 0.4rem; }
+.swatch { border: 0; background: none; padding: 0; text-align: center; font-size: 0.64rem; letter-spacing: 0.04em; font-weight: 400; color: var(--ink); }
+.swatch i { display: block; width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 0.25rem; border: 1px solid var(--hair); position: relative; }
+.swatch[aria-pressed="true"] i { box-shadow: 0 0 0 2px var(--butter), 0 0 0 3.5px var(--maroon); }
+.swatch[aria-pressed="true"] i::after { content: "\2713"; position: absolute; inset: 0; display: grid; place-items: center; font-size: 0.85rem; font-weight: 600; color: var(--chk, #fff); }
+.pick-row { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.9rem; }
+.pick-row input[type="color"] { width: 44px; height: 34px; border: 1px solid var(--maroon); padding: 2px; background: var(--butter-pale); }
+.pick-row span { font-size: 0.85rem; }
+.buy { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: stretch; margin-top: 0.4rem; }
+.buy .btn { flex: 1 1 200px; }
+.stepper { display: inline-flex; align-items: center; border: 1px solid var(--maroon); background: var(--butter-pale); }
+.stepper button { width: 42px; height: 100%; min-height: 44px; border: 0; background: none; font-size: 1.2rem; color: var(--maroon); }
+.stepper button:hover { background: var(--butter-deep); }
+.stepper output { min-width: 2.2rem; text-align: center; font-weight: 500; font-variant-numeric: tabular-nums; }
+.spec { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 1.4rem; margin: 0; font-size: 0.88rem; }
+.spec dt { font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; color: var(--yarn); padding-top: 0.2rem; }
+.spec dd { margin: 0; }
+@media (max-width: 780px) { .modal-card { grid-template-columns: 1fr; } }
+
+/* drawer */
+.drawer { position: fixed; top: 0; bottom: 0; right: 0; z-index: 90; width: min(470px, 100%); background: var(--butter-pale); border-left: 1px solid var(--maroon); display: flex; flex-direction: column; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px); }
+.drawer[hidden] { display: none !important; }
+.drawer-head { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.3rem; border-bottom: 1px solid var(--hair); }
+.drawer-head h2 { font-size: 2.1rem; font-weight: 400; }
+.drawer-body { flex: 1; overflow: auto; padding: 1.1rem 1.3rem; display: flex; flex-direction: column; gap: 1.2rem; }
+.empty { text-align: center; padding: 2.5rem 0.5rem; }
+.empty h3 { font-size: 2rem; font-weight: 400; margin-bottom: 0.5rem; }
+.empty p { font-weight: 300; }
+.line-item { display: grid; grid-template-columns: 70px 1fr auto; gap: 0.9rem; align-items: start; padding-bottom: 1.1rem; border-bottom: 1px solid var(--hair-soft); }
+.line-item img { width: 70px; height: 88px; object-fit: cover; }
+.line-item h4 { font-size: 1.05rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.25; }
+.line-item .meta { font-size: 0.8rem; color: var(--yarn); margin-top: 0.2rem; }
+.line-item .row { display: flex; align-items: center; gap: 0.8rem; margin-top: 0.6rem; flex-wrap: wrap; }
+.line-item .stepper button { width: 32px; min-height: 32px; font-size: 1rem; }
+.rm-btn { border: 0; background: none; text-decoration: underline; font-size: 0.8rem; padding: 0; }
+.totals { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--maroon); padding-top: 0.9rem; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; }
+.totals .price { font-size: 1.4rem; letter-spacing: 0.02em; }
+.drawer-foot { padding: 1.1rem 1.3rem; border-top: 1px solid var(--hair); display: grid; gap: 0.9rem; background: var(--butter); }
+.small { font-size: 0.82rem; font-weight: 300; }
+
+/* forms */
+label.l { display: block; font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; font-weight: 500; margin-bottom: 0.2rem; color: var(--yarn); }
+.field { width: 100%; font: inherit; font-size: 1rem; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--maroon); border-radius: 0; padding: 0.6rem 0; }
+textarea.field { border: 1px solid var(--maroon); padding: 0.7rem; min-height: 5.5rem; resize: vertical; }
+.field::placeholder { color: rgba(74, 0, 0, 0.5); }
+.field:focus { outline: none; border-color: var(--yarn); box-shadow: 0 1px 0 var(--yarn); }
+.field-row { display: grid; gap: 1.2rem; grid-template-columns: 1fr 1fr; }
+@media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
+.err { color: #a30000; font-weight: 500; font-size: 0.88rem; }
+
+/* custom */
+.custom-grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+@media (max-width: 980px) { .custom-grid { grid-template-columns: 1fr; } }
+fieldset { border: 0; padding: 0; margin: 0 0 2.8rem; min-width: 0; }
+legend { font-family: var(--display); font-size: 2.1rem; font-weight: 400; color: var(--maroon); padding: 0; margin-bottom: 1.1rem; line-height: 1; }
+legend small { display: block; font-family: var(--body); font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--yarn); font-weight: 500; margin-bottom: 0.7rem; }
+.group-t { font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; font-weight: 500; color: var(--yarn); margin: 1.2rem 0 0.6rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; min-height: 2rem; }
+.tag { display: inline-flex; align-items: center; gap: 0.5rem; border: 1px solid var(--maroon); padding: 0.25rem 0.35rem 0.25rem 0.6rem; font-size: 0.82rem; background: var(--butter-pale); }
+.tag i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--hair); }
+.tag button { border: 0; background: none; width: 22px; height: 22px; line-height: 1; }
+.tag button:hover { background: var(--butter-deep); }
+.side { position: sticky; top: calc(96px + env(safe-area-inset-top, 0px)); display: grid; gap: 1rem; }
+@media (max-width: 980px) { .side { position: static; } }
+.c-prev { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--blush); border: 1px solid var(--maroon); }
+.c-prev img.pv { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; animation: pvIn .5s ease; }
+.c-prev .pv-empty { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .6rem; background: var(--butter-pale); color: var(--yarn); font-size: .66rem; letter-spacing: .26em; text-transform: uppercase; font-weight: 500; text-align: center; padding: 1rem; }
+.c-prev .pv-empty img { width: 64px; opacity: .55; }
+.c-prev .pv-n { position: absolute; left: 0; bottom: 0; background: var(--butter); color: var(--maroon); padding: .45rem .8rem; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; }
+.c-prev-inline { display: none; margin: 0 0 1.2rem; max-width: 420px; }
+@media (max-width: 980px) { .c-prev-inline { display: block; } .c-prev-side { display: none; } #cProducts .chips { max-height: 15.5rem; overflow-y: auto; padding: 0.2rem 0.4rem 0.2rem 0; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; border-bottom: 1px solid var(--hair); } }
+@keyframes pvIn { from { opacity: 0; } to { opacity: 1; } }
+.summary { position: static; border: 1px solid var(--maroon); padding: 1.6rem; background: var(--butter-pale); display: grid; gap: 1.1rem; }
+.summary h2 { font-size: 2.2rem; font-weight: 400; }
+.summary dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0.55rem 1.1rem; font-size: 0.9rem; }
+.summary dt { font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; color: var(--yarn); padding-top: 0.2rem; }
+.summary dd { margin: 0; word-break: break-word; }
+.summary .none { opacity: 0.55; }
+.missing { margin: 0; padding-left: 1.1rem; }
+.est { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--hair); padding-top: 0.9rem; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; }
+.est .price { font-size: 1.3rem; letter-spacing: 0.02em; }
+
+/* contact */
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 1.4rem; margin: 2rem 0 3rem; }
+.contact-card { border: 1px solid var(--maroon); padding: 1.8rem; background: var(--butter-pale); display: flex; flex-direction: column; gap: 0.9rem; min-width: 0; }
+.contact-card h2 { font-size: 2.2rem; font-weight: 400; }
+.contact-card .val { font-family: var(--display); font-size: 1.5rem; font-weight: 500; word-break: break-all; user-select: all; color: var(--maroon); line-height: 1.15; }
+.contact-card .actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: auto; padding-top: 0.6rem; }
+.wa-glyph { display: inline-grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--wa); color: #fff; }
+.steps { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 1.6rem; counter-reset: s; }
+.steps li { border-top: 1px solid var(--maroon); padding-top: 1rem; counter-increment: s; font-weight: 300; }
+.steps li::before { content: counter(s); font-family: var(--display); font-style: italic; font-size: 2.6rem; color: var(--yarn); display: block; line-height: 1; margin-bottom: 0.6rem; }
+.steps b { display: block; font-family: var(--display); font-size: 1.6rem; font-weight: 500; color: var(--maroon); margin-bottom: 0.2rem; line-height: 1.1; }
+
+/* footer */
+footer.wrap { margin-top: clamp(4rem, 9vw, 8rem); padding: 2.4rem 0 6rem; border-top: 1px solid var(--hair); display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; align-items: end; }
+footer img { width: 150px; height: auto; margin-bottom: 0.8rem; }
+footer nav { display: flex; gap: 1.8rem; flex-wrap: wrap; }
+footer nav a { font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 500; text-decoration: none; }
+footer nav a:hover { color: var(--yarn); }
+
+/* whatsapp + toast */
+.wa-fab { position: fixed; z-index: 70; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); width: 62px; height: 62px; border-radius: 50%; background: var(--wa); color: #fff; display: grid; place-items: center; box-shadow: 0 6px 20px rgba(74, 0, 0, 0.32); text-decoration: none; transition: transform 0.25s; }
+.wa-fab:hover { transform: scale(1.08); }
+.toast { position: fixed; z-index: 120; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--maroon); color: var(--butter); padding: 0.85rem 1.3rem; font-size: 0.85rem; display: flex; align-items: center; gap: 1.1rem; width: max-content; max-width: calc(100vw - 32px); box-shadow: 0 6px 20px rgba(74, 0, 0, 0.32); }
+.toast button { background: none; border: 0; color: var(--butter); text-decoration: underline; font-weight: 500; padding: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  #intro { display: none; }
+  .js .ha, .js .rv { opacity: 1; transform: none; animation: none; transition: none; }
+  .ready .frame img, .marquee .track, .stamp svg { animation: none; }
+  html { scroll-behavior: auto; }
+}
+.rm .ha, .rm .rv { opacity: 1 !important; transform: none !important; animation: none !important; }
+</style>
+</head>
+<body>
+
+
+<!-- logo intro -->
+<div id="intro" aria-hidden="true">
+  <div class="pn t"></div><div class="pn b"></div>
+  <div class="stage">
+    <img class="i-ball" src="img/ball.png" alt="" width="109" height="96">
+    <div class="i-word"><img src="img/wordmark.png" alt="" width="296" height="84"></div>
+    <svg class="th" viewBox="0 0 320 50" aria-hidden="true"><path d="M2 30 C 38 4, 70 52, 112 26 S 190 6, 230 28 S 292 46, 318 14"/></svg>
+    <p class="i-tag">Handcrafted designs</p>
+  </div>
+</div>
+
+<div class="progress" id="progress" aria-hidden="true"><i></i><b></b></div>
+
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#home" aria-label="Loom home"><img class="b-ball" src="img/ball.png" alt="" width="109" height="96"><img class="b-word" src="img/wordmark.png" alt="Loom" width="296" height="84"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#products" data-nav="products">Products</a>
+      <a href="#custom" data-nav="custom">Custom</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="head-actions">
+      <a class="icon-btn" href="https://www.instagram.com/_loom.co_/" target="_blank" rel="noopener" aria-label="Loom on Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <button class="cart-btn" id="cartBtn" aria-label="Open cart">Cart <span class="count" id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HOME -->
+  <section data-view="home">
+    <div class="hero">
+      <div>
+        <span class="eyebrow ha" style="--i:0">Handcrafted designs</span>
+        <h1 class="ha" style="--i:1">Where yarn <em>meets</em> design.</h1>
+        <svg class="h-thread ha" style="--i:1" viewBox="0 0 400 18" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M2 11 C 50 2, 90 17, 150 9 S 250 2, 300 10 S 370 14, 398 6"/></svg>
+        <p class="lead ha" style="--i:2">Signature bags, home accents and accessories, crocheted by hand and made to order in the colours you choose.</p>
+        <div class="cta ha" style="--i:3">
+          <a class="btn" href="#products">Shop the collection</a>
+          <a class="btn ghost" href="#custom">Custom order</a>
+        </div>
+        <div class="skeins ha" style="--i:4"><span class="dots" aria-hidden="true"><i style="background:#700000"></i><i style="background:#e28fa0"></i><i style="background:#f2d21b"></i><i style="background:#9db08a"></i><i style="background:#8fb8d6"></i><i style="background:#4a2a20"></i><i style="background:#f6efdc"></i></span><span>Every piece in your colours</span></div>
+        <div class="newin ha" style="--i:5"><span class="eyebrow">Just in</span><div class="newin-row" id="heroNew"></div></div>
+      </div>
+      <div class="collage ha" style="--i:2" aria-label="A selection of Loom bags">
+        <div class="col">
+          <div class="frame f-arch"><img src="img/clutch-1.jpg" alt="Cobalt blue Loom clutch bag" style="object-position:50% 78%"></div>
+          <div class="frame f-circle"><img src="img/dusk-2.jpg" alt="Pink Dusk bag with gold thread and chain" style="object-position:40% 62%"></div>
+        </div>
+        <div class="col">
+          <div class="frame f-tall"><img src="img/noor-1.jpg" alt="Gold Noor mini bag with pearl handle" style="object-position:50% 60%"></div>
+          <div class="frame f-arch2"><img src="img/rose-1.jpg" alt="Black Rose Bouquet bag with crochet roses" style="object-position:50% 50%"></div>
+        </div>
+        <div class="stamp" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60,60 m-45,0 a45,45 0 1,1 90,0 a45,45 0 1,1 -90,0"/></defs><text><textPath href="#circ" textLength="280" lengthAdjust="spacing">Handmade · Made to order · Custom colours ·</textPath></text></svg>
+          <img src="img/ball.png" alt="" width="109" height="96">
+        </div>
+      </div>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="track" id="marquee"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <div><span class="eyebrow">The collection</span><h2>Pieces we <em>love</em></h2></div>
+        <a class="link-arrow" href="#products">View all products</a>
+      </div>
+      <div class="grid four" id="homeFeatured"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><div><span class="eyebrow">Browse</span><h2>Shop by category</h2></div></div>
+      <div class="cat-list" id="homeCats"></div>
+    </div>
+
+    <div class="section">
+      <div class="band">
+        <div>
+          <span class="eyebrow">Made by hand</span>
+          <h2>Every piece begins as yarn and <em>ends in your hands.</em></h2>
+          <div class="facts">
+            <div><h3>Ready in two weeks</h3><p>Nothing sits on a shelf. Each piece is worked stitch by stitch after you order, so please order two weeks prior.</p></div>
+            <div><h3>Your colours</h3><p>Choose the colour, or a pairing, on every piece. Custom sizes and ideas are welcome too.</p></div>
+            <div><h3>Order on WhatsApp</h3><p>Your cart opens as a ready-written message to us. We confirm the details with you there.</p></div>
+          </div>
+        </div>
+        <div class="band-img"><img src="img/rose-2.jpg" alt="Rose Bouquet bag" loading="lazy" style="object-position:50% 40%"></div>
+      </div>
+    </div>
+
+
+    <div class="section">
+      <div class="insta">
+        <div style="display:flex;align-items:center;gap:1.1rem">
+          <span class="ig-glyph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></span>
+          <div><h2>@_loom.co_</h2><p class="small">New pieces and works in progress land on Instagram first.</p></div>
+        </div>
+        <a class="btn ghost" href="https://www.instagram.com/_loom.co_/" target="_blank" rel="noopener">Follow on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section data-view="products" hidden>
+    <div class="page-head">
+      <span class="eyebrow ha" style="--i:0">The collection</span>
+      <h1 class="ha" style="--i:1">Products</h1>
+      <p class="t ha" style="--i:2">Tap a piece to see its details, sizes and more photos. Choose your colours, add it to the cart and send your order on WhatsApp.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
+    <div id="productArea"></div>
+  </section>
+
+  <!-- CUSTOM -->
+  <section data-view="custom" hidden>
+    <div class="page-head">
+      <span class="eyebrow ha" style="--i:0">Made just for you</span>
+      <h1 class="ha" style="--i:1">Custom order</h1>
+      <p class="t ha" style="--i:2">Choose a piece, set the size and pick your own colours. We receive it on WhatsApp, confirm the price and start crocheting. Please allow about two weeks.</p>
+    </div>
+    <div class="custom-grid">
+      <form id="customForm" novalidate onsubmit="return false">
+        <fieldset>
+          <legend><small>Step one</small>Choose a piece</legend>
+          <div class="c-prev c-prev-inline" aria-live="polite"></div>
+          <div id="cProducts"></div>
+          <div id="cOtherWrap" hidden style="margin-top:1.2rem">
+            <label class="l" for="cOther">Describe what you would like made</label>
+            <input class="field" id="cOther" placeholder="A key chain, a cushion cover, a top...">
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><small>Step two</small>Size</legend>
+          <div class="chips" id="cSizes" role="group" aria-label="Size"></div>
+          <div style="margin-top:1.2rem">
+            <label class="l" for="cExact">Exact measurements (optional)</label>
+            <input class="field" id="cExact" placeholder="e.g. 30 cm wide x 25 cm tall">
+          </div>
+          <div id="cExtras" style="margin-top:1.4rem"></div>
+        </fieldset>
+        <fieldset>
+          <legend><small>Step three</small>Colours</legend>
+          <div class="swatches" id="cSwatches"></div>
+          <div class="pick-row">
+            <label for="cPick" class="small">Want a different shade?</label>
+            <input type="color" id="cPick" value="#700000">
+            <button type="button" class="btn sm ghost" id="cAddColour">Add this colour</button>
+          </div>
+          <div class="tags" id="cChosen" aria-live="polite"></div>
+          <label class="l" for="cColourNote">Colour notes (optional)</label>
+          <input class="field" id="cColourNote" placeholder="e.g. maroon body with butter handles">
+        </fieldset>
+        <fieldset>
+          <legend><small>Step four</small>Your details</legend>
+          <div class="field-row">
+            <div><label class="l" for="cName">Your name</label><input class="field" id="cName" autocomplete="name"></div>
+            <div><span class="l" style="display:block;margin-bottom:.5rem">Quantity</span>
+              <div class="stepper"><button type="button" data-cqty="-1" aria-label="Decrease quantity">&minus;</button><output id="cQtyVal">1</output><button type="button" data-cqty="1" aria-label="Increase quantity">+</button></div>
+            </div>
+          </div>
+          <div style="margin-top:1.4rem">
+            <label class="l" for="cNotes">Anything else we should know?</label>
+            <textarea class="field" id="cNotes" placeholder="Reference photos can be sent on WhatsApp after you place the order."></textarea>
+          </div>
+        </fieldset>
+      </form>
+      <div class="side">
+      <div class="c-prev c-prev-side" aria-live="polite"></div>
+      <aside class="summary" aria-label="Your custom order">
+        <h2>Your piece</h2>
+        <dl id="cSummary"></dl>
+        <div class="est" id="cEst" hidden><span>Estimate</span><span class="price" id="cEstVal"></span></div>
+        <p class="small">Final price is confirmed on WhatsApp. Ready in about two weeks.</p>
+        <div id="cMissing"></div>
+        <a class="btn wa" id="cSend" href="#custom" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#wa-path"/></svg>
+          Place order on WhatsApp
+        </a>
+      </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section data-view="contact" hidden>
+    <div class="page-head">
+      <span class="eyebrow ha" style="--i:0">Say hello</span>
+      <h1 class="ha" style="--i:1">Contact</h1>
+      <p class="t ha" style="--i:2">The quickest way to reach us is WhatsApp. Ask about a piece, share a reference photo or check on an order.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="wa-glyph"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#wa-path"/></svg></span>
+        <h2>WhatsApp</h2>
+        <p class="val">+91 70265 07944</p>
+        <p class="small">Opens a chat with a message already written for you.</p>
+        <div class="actions"><a class="btn wa" id="contactWa" href="#contact" target="_blank" rel="noopener">Chat on WhatsApp</a></div>
+      </div>
+      <div class="contact-card">
+        <h2>Email</h2>
+        <p class="val" id="emailVal">loooooom.co@gmail.com</p>
+        <p class="small">For bulk orders, gifting and collaborations.</p>
+        <div class="actions">
+          <button class="btn ghost" id="copyEmail" type="button">Copy address</button>
+          <a class="btn ghost" href="mailto:loooooom.co@gmail.com">Open email app</a>
+        </div>
+      </div>
+      <div class="contact-card">
+        <span class="ig-glyph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></span>
+        <h2>Instagram</h2>
+        <p class="val">@_loom.co_</p>
+        <p class="small">See new pieces and works in progress.</p>
+        <div class="actions"><a class="btn ghost" href="https://www.instagram.com/_loom.co_/" target="_blank" rel="noopener">Visit profile</a></div>
+      </div>
+    </div>
+    <div class="section-head" style="margin-top:4rem"><div><span class="eyebrow">How it works</span><h2>From cart to <em>doorstep</em></h2></div></div>
+    <ol class="steps">
+      <li><b>Choose</b>Add pieces to your cart, or design a custom one.</li>
+      <li><b>Send on WhatsApp</b>Your order opens as a ready message. Press send to share it with us.</li>
+      <li><b>We confirm</b>We check colours, size, delivery and payment with you on chat.</li>
+      <li><b>Made by hand</b>Your piece is worked to order and ready in about two weeks.</li>
+    </ol>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div><img src="img/wordmark.png" alt="Loom" width="296" height="84"><p class="small">Handmade. Made to order. Please order two weeks prior.</p></div>
+  <nav aria-label="Footer"><a href="#products">Products</a><a href="#custom">Custom</a><a href="#contact">Contact</a><a href="https://www.instagram.com/_loom.co_/" target="_blank" rel="noopener">Instagram</a></nav>
+</footer>
+
+<a class="wa-fab" id="waFab" href="#contact" target="_blank" rel="noopener" aria-label="Chat with Loom on WhatsApp">
+  <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#wa-path"/></svg>
+</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><path id="wa-path" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></defs></svg>
+
+<div class="scrim" id="modalScrim" hidden></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Product details" hidden>
+  <div class="modal-card" id="modalCard"></div>
+</div>
+
+<div class="scrim" id="drawerScrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Your cart" hidden>
+  <div class="drawer-head"><h2>Your cart</h2><button class="close-x" style="position:static" id="drawerClose" aria-label="Close cart">&times;</button></div>
+  <div class="drawer-body">
+    <div id="cartItems"></div>
+    <div id="cartTotals"></div>
+  </div>
+  <div class="drawer-foot" id="cartFoot">
+    <div class="field-row">
+      <div><label class="l" for="oName">Your name</label><input class="field" id="oName" autocomplete="name"></div>
+      <div><label class="l" for="oPhone">Phone (optional)</label><input class="field" id="oPhone" inputmode="tel" autocomplete="tel"></div>
+    </div>
+    <div><label class="l" for="oAddr">Delivery address</label><textarea class="field" id="oAddr" style="min-height:3.8rem" autocomplete="street-address"></textarea></div>
+    <div><label class="l" for="oNote">Note (optional)</label><input class="field" id="oNote"></div>
+    <p class="err" id="oErr" hidden></p>
+    <a class="btn wa" id="checkout" href="#" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#wa-path"/></svg>
+      Checkout on WhatsApp
+    </a>
+    <p class="small">Your order opens as a message to Loom. Delivery and payment are confirmed on chat.</p>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" hidden><span id="toastMsg"></span><button id="toastAct" hidden></button></div>
+
+<script>
+/* ===== intro ===== */
+(function () {
+  var root = document.documentElement, intro = document.getElementById('intro');
+  function ready() { root.classList.add('ready'); }
+  if (!intro) { ready(); return; }
+  if (root.classList.contains('rm')) { intro.remove(); root.classList.remove('intro-lock'); ready(); return; }
+  var done = false;
+  function open() {
+    if (done) return; done = true;
+    intro.classList.add('open');
+    setTimeout(ready, 520);
+    setTimeout(function () { intro.remove(); root.classList.remove('intro-lock'); }, 1700);
+  }
+  var tm = setTimeout(open, 2900);
+  intro.addEventListener('click', function () { clearTimeout(tm); open(); });
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+
+  /* ===== Settings ===== */
+  var WA_NUMBER = '917026507944';
+  var EMAIL = 'loooooom.co@gmail.com';
+  var LEAD_TIME = 'About 2 weeks';
+
+  var CATS = [
+    { id: 'bags', name: 'Bags' },
+    { id: 'home', name: 'Home essence' },
+    { id: 'accessories', name: 'Accessories' },
+    { id: 'keychains', name: 'Key chains' },
+    { id: 'apparel', name: 'Apparels' }
+  ];
+  var CHAIN = [{ id: 'chain', label: 'Extra chain / handle', p: 200 }];
+  var CHARMS = [{ id: 'charms', label: 'Charms of your choice', p: 80 }];
+  var PRODUCTS = [
+    { id: 'clutch', cat: 'bags', name: 'Clutch Bag', sizes: [{ n: 'Small', p: 1400 }, { n: 'Medium', p: 1700 }], extras: CHAIN,
+      desc: 'A soft, rounded clutch with a braided edge and an easy open top. Shown in cobalt blue. Choose any colour you like, and add a chain or handle if you want to carry it another way.',
+      images: ['img/clutch-1.jpg', 'img/clutch-2.jpg', 'img/clutch-3.jpg'] },
+    { id: 'baske', cat: 'bags', name: 'Baské Bag', sizes: [{ n: 'Small', p: 1200 }, { n: 'Medium', p: 1400 }, { n: 'Large', p: 1600 }], extras: CHAIN,
+      desc: 'A roomy basket bag with a looped handle and bold stripes. Shown in lemon yellow and white. Pick your own colour pairing and size, and add a chain or handle if you like.',
+      images: ['img/baske-1.jpg', 'img/baske-2.jpg'] },
+    { id: 'basic-open', cat: 'bags', name: 'Basic Shoulder Bag', sizes: [{ n: 'One size', p: 1200 }],
+      desc: 'A slim shoulder bag with a long, chunky strap and the Loom label on the front. Shown in bright yellow. Made in any colour.',
+      images: ['img/basic-1.jpg', 'img/basic-2.jpg'] },
+    { id: 'basic-flap', cat: 'bags', name: 'Basic Shoulder Bag', variant: 'Flap', sizes: [{ n: 'One size', p: 1200 }],
+      desc: 'A structured shoulder bag with a fold-over flap and a slim strap. Shown in dark chocolate. Made in any colour.',
+      images: ['img/flap-1.jpg', 'img/flap-2.jpg'] },
+    { id: 'rose', cat: 'bags', name: 'Rose Bouquet Bag', sizes: [{ n: 'One size', p: 3100 }], straps: ['Leather strap', 'Chain strap', 'Crochet strap'],
+      desc: 'A drawstring bucket bag crowned with hand-crocheted roses and finished with leaf-tipped green cords. Shown in black with deep red roses. Choose your strap: leather, chain or crochet.',
+      images: ['img/rose-1.jpg', 'img/rose-2.jpg'] },
+    { id: 'dusk', cat: 'bags', name: 'Dusk Bag', sizes: [{ n: 'Small', p: 1500 }, { n: 'Medium', p: 1700 }],
+      desc: 'Soft rose pink with fine gold thread worked through every stitch, a braided top and a gold chain strap. Made in any colour.',
+      images: ['img/dusk-1.jpg', 'img/dusk-2.jpg', 'img/dusk-3.jpg'] },
+    { id: 'everyday', cat: 'bags', name: 'Everyday Shoulder Bag', sizes: [{ n: 'One size', p: 1700 }],
+      desc: 'A ribbed shoulder bag with a thick braided strap, side bows and trailing ties. Shown in chocolate and mocha. Made in any colour.',
+      images: ['img/everyday-1.jpg', 'img/everyday-2.jpg', 'img/everyday-3.jpg'] },
+    { id: 'noor', cat: 'bags', name: 'Noor Bag', sizes: [{ n: 'One size', p: 900 }],
+      desc: 'A small open-weave bag in metallic gold with a pearl-bead handle. Just big enough for an evening out. Made in any colour.',
+      images: ['img/noor-1.jpg', 'img/noor-2.jpg'] },
+    { id: 'cloud', cat: 'bags', name: 'Cloud Bag', sizes: [{ n: 'One size', p: 1000 }],
+      desc: 'A soft, plush shoulder bag worked in a chunky, fluffy yarn, with a long braided strap and a small bow at the front. Shown in coral, teal, orange and cream. Made in any colour.',
+      images: ['img/cloud-1.jpg', 'img/cloud-2.jpg'] },
+    { id: 'aura', cat: 'bags', name: 'Aura Bag', sizes: [{ n: 'One size', p: 1800 }],
+      desc: 'A sturdy top-handle tote in a bold two-tone stitch, with braided handles and the Loom label. Shown in black and white. Choose your own colour pairing.',
+      images: ['img/aura-1.jpg', 'img/aura-2.jpg'] },
+    { id: 'mesh', cat: 'accessories', name: 'Mesh Cap', sizes: [{ n: 'One size (fits all)', p: 350 }], extras: CHARMS,
+      desc: 'A light, open-net crochet cap that sits close to the head. Shown in sand. Add charms of your choice, like the shell charms in the photos. Made in any colour.',
+      images: ['img/mesh-1.jpg', 'img/mesh-2.jpg', 'img/mesh-3.jpg', 'img/mesh-4.jpg'] },
+    { id: 'mesh-floral', cat: 'accessories', name: 'Mesh Cap in Floral Design', sizes: [{ n: 'One size (fits all)', p: 400 }], extras: CHARMS,
+      desc: 'The mesh cap with a lacy, flower-like pattern worked into the crochet. Shown in dusty mauve with shell charms. Made in any colour.',
+      images: ['img/meshf-1.jpg', 'img/meshf-2.jpg'] },
+    { id: 'bandana-diamond', cat: 'accessories', name: 'Bandana in Diamond Pattern', sizes: [{ n: 'Kids', p: 450 }, { n: 'Adults', p: 550 }], extras: CHARMS,
+      desc: 'A triangle bandana with an open diamond pattern and a scalloped edge, tied at the back. Shown in cream. Made in any colour, in kids and adult sizes.',
+      images: ['img/band-d1.jpg', 'img/band-d2.jpg', 'img/band-d3.jpg'] },
+    { id: 'bandana-floral', cat: 'accessories', name: 'Bandana in Floral Pattern', sizes: [{ n: 'Kids', p: 450 }, { n: 'Adults', p: 550 }], extras: CHARMS,
+      desc: 'A triangle bandana worked in a lacy floral pattern, with long ties. Shown in sand and black. Made in any colour, in kids and adult sizes.',
+      images: ['img/band-f1.jpg', 'img/band-f2.jpg'] },
+    { id: 'phone', cat: 'bags', name: 'Phone Bag', sizes: [{ n: 'One size', p: 800 }],
+      desc: 'A slim crossbody pouch made to hold your phone, with a fold-over flap, a small hand-crocheted flower and a long braided strap. Shown in dark chocolate with a butter-yellow flower. Made in any colour.',
+      images: ['img/phone-1.jpg', 'img/phone-2.jpg', 'img/phone-3.jpg'] },
+    { id: 'beanie', cat: 'apparel', name: 'Beanie', sizes: [{ n: 'One size', p: 900 }],
+      desc: 'A chunky ribbed beanie with a folded cuff and the Loom label. Shown in caramel brown and in sand. Made in any colour.',
+      images: ['img/beanie-1.jpg', 'img/beanie-2.jpg'] },
+    { id: 'teddy', cat: 'apparel', name: 'Teddy Ears Baby Beanie', sizes: [{ n: 'One size', p: 700 }],
+      desc: 'A soft little baby beanie with round teddy ears and a ribbed brim. Shown in navy. Made in any colour.',
+      images: ['img/teddy-1.jpg', 'img/teddy-2.jpg'] },
+    { id: 'prayer', cat: 'apparel', name: 'Prayer Cap', sizes: [{ n: 'One size', p: 550 }],
+      desc: 'A light, breathable open-weave prayer cap that sits close to the head. Shown in white. Made in any colour.',
+      images: ['img/prayer-1.jpg', 'img/prayer-2.jpg'] },
+    { id: 'pouch', cat: 'accessories', name: 'Multipurpose Pouch', sizes: [{ n: 'One size', p: 650 }],
+      desc: 'A flat fold-over pouch with a crocheted bow and a contrast edge. Keep your makeup, stationery, cables or small essentials in it. Shown in violet with cream trim. Made in any colour.',
+      images: ['img/pouch-1.jpg', 'img/pouch-2.jpg'] },
+    { id: 'bowkey', cat: 'keychains', name: 'Bow Keychain', sizes: [{ n: 'Small', p: 140 }, { n: 'Medium', p: 170 }, { n: 'Large', p: 230 }], straps: ['Silver', 'Gold'], strapLabel: 'Keychain ring',
+      desc: 'A hand-crocheted bow on a keyring, to hang on a bag, a bunch of keys or a zip. Shown in sage, pink, lilac and butter yellow. Choose a silver or gold ring, and any colour you like.',
+      images: ['img/key-1.jpg', 'img/key-2.jpg', 'img/key-3.jpg'] },
+    { id: 'crescent', cat: 'bags', name: 'Crescent Bag', sizes: [{ n: 'Small', p: 1500 }, { n: 'Medium', p: 1700 }], extras: [{ id: 'xstrap', label: 'Extra strap', p: 200 }],
+      desc: 'A soft crescent-shaped shoulder bag worked in thick cord, with a braided top edge, the Loom label and gold clip hardware. Shown in sand, and in a pink and yellow mix. Add an extra strap to carry it your way. Made in any colour.',
+      images: ['img/crescent-1.jpg', 'img/crescent-2.jpg', 'img/crescent-3.jpg', 'img/crescent-4.jpg'] },
+    { id: 'quran-tulip', cat: 'accessories', name: 'Tulip Quran Cover', sizes: [{ n: 'One size', p: 900 }],
+      desc: 'A hand-crocheted Quran cover with rows of tulips on green zigzag stems. Shown in lilac, white and green. Made in any colour.',
+      images: ['img/qtulip-1.jpg', 'img/qtulip-2.jpg'] },
+    { id: 'quran-floral', cat: 'accessories', name: 'Floral Quran Cover With Name', sizes: [{ n: 'One size', p: 1000 }],
+      desc: 'An open-weave Quran cover in soft lilac, decorated with puff-stitch flowers with pearl centres and a name crocheted across the top. Write the name you would like in the note. Made in any colour.',
+      images: ['img/qfloral-1.jpg'] },
+    { id: 'baby-dress', cat: 'apparel', name: 'Baby Dress', sizes: [{ n: '6-12 months', p: 1400 }],
+      desc: 'A light crocheted baby dress with flutter sleeves and a scalloped hem. Shown in white with yellow trim. Made in any colour.',
+      images: ['img/dress-1.jpg', 'img/dress-2.jpg'] },
+    { id: 'baby-set', cat: 'apparel', name: 'Baby Sweater & Pant Set', sizes: [{ n: '6-12 months', p: 2900 }],
+      desc: 'A warm button-front sweater with wooden buttons and matching drawstring pants. Shown in wine red, and the sweater in magenta. Made in any colour.',
+      images: ['img/set-1.jpg', 'img/set-2.jpg', 'img/set-3.jpg'] },
+    { id: 'rose-case', cat: 'accessories', name: 'Rose Phone Case', sizes: [{ n: 'Any phone model', p: 700 }],
+      desc: 'A snug crocheted phone case with a hand-crocheted rose. Shown in black with a deep red rose. Made for any phone model: tell us yours in the note. Made in any colour.',
+      images: ['img/case-1.jpg', 'img/case-2.jpg'] },
+    { id: 'mandala', cat: 'home', name: 'Round Mandala Throw', sizes: [{ n: '25 inches across', p: 1300 }],
+      desc: 'A round, lace-like mandala throw crocheted in thick cord and finished with a ring of knotted tassels. Lay it on a table, a chair or a sofa. 25 inches in diameter. Shown in caramel brown and in cream. Made in any colour.',
+      images: ['img/mandala-1.jpg', 'img/mandala-2.jpg', 'img/mandala-3.jpg', 'img/mandala-4.jpg'] },
+    { id: 'lattice', cat: 'home', name: 'Boho Lattice Throw', sizes: [{ n: '50 x 16 inches', p: 1900 }],
+      desc: 'A long, open lattice throw crocheted in soft chunky yarn, finished with knotted tassels and the Loom label. Drape it over a sofa, a bed or a chair. 50 x 16 inches. Shown in deep chocolate. Made in any colour, and other sizes on request: add the size you want in the note.',
+      images: ['img/lattice-1.jpg', 'img/lattice-2.jpg'] },
+    { id: 'throw-floral', cat: 'home', name: 'Floral Pattern Throw', sizes: [{ n: '50 x 16 inches', p: 2300 }],
+      desc: 'A thick, textured throw worked in a flower-like stitch with a scalloped edge and a row of generous tassels. 50 x 16 inches. Shown in mustard. Made in any colour, and other sizes on request: add the size you want in the note.',
+      images: ['img/tfloral-1.jpg', 'img/tfloral-2.jpg'] },
+    { id: 'vest', cat: 'apparel', name: 'Mesh Vest', sizes: [{ n: 'Small', p: 1600 }, { n: 'Medium', p: 1800 }],
+      desc: 'An open-mesh crochet vest with a V-neck and three front ties finished in little bows. Light enough to layer over anything. Shown in leaf green. Made in any colour.',
+      images: ['img/vest-1.jpg', 'img/vest-2.jpg'] },
+    { id: 'sweater', cat: 'apparel', name: 'Sweater', sizes: [{ n: '5-6 years', p: 2800 }],
+      desc: 'A chunky, ribbed-cuff pullover for kids, crocheted in a thick herringbone stitch with the Loom label at the neck. Size 5-6 years. Shown in chocolate brown. Made in any colour.',
+      images: ['img/sweater-1.jpg', 'img/sweater-2.jpg'] },
+    { id: 'cardigan', cat: 'apparel', name: 'Diamond Pattern Long Cardigan', sizes: [{ n: 'Medium', p: 7500 }],
+      desc: 'A long, button-front cardigan worked in an open diamond pattern, with balloon sleeves, ribbed cuffs and hem, and wooden buttons. Size medium. Shown in butter yellow. Made in any colour.',
+      images: ['img/cardi-1.jpg', 'img/cardi-2.jpg'] },
+    { id: 'key-fly', cat: 'keychains', name: 'Customised Butterfly Keychain', sizes: [{ n: 'One size', p: 270 }],
+      desc: 'A string of crocheted butterfly wings and a little daisy on a gold chain and ring. Shown in yellow, orange, dusty blue and white. Choose your own colours.',
+      images: ['img/fly-1.jpg', 'img/fly-2.jpg'] },
+    { id: 'key-ice', cat: 'keychains', name: 'Ice Cream Cone Keychain', sizes: [{ n: 'One size', p: 250 }],
+      desc: 'A tiny stuffed ice cream cone with a scalloped scoop, on a gold ring. Shown in strawberry pink. Made in any colour.',
+      images: ['img/ice-1.jpg', 'img/ice-2.jpg'] },
+    { id: 'key-foot', cat: 'keychains', name: 'Football Keychain', sizes: [{ n: 'Small', p: 270 }, { n: 'Big', p: 320 }],
+      desc: 'A little stuffed football worked in black and white patches, on a steel ring. Available in two sizes. Made in any colour.',
+      images: ['img/foot-1.jpg', 'img/foot-2.jpg', 'img/foot-3.jpg'] },
+    { id: 'key-mug', cat: 'keychains', name: 'Coffee Mug Keychain', sizes: [{ n: 'One size', p: 300 }],
+      desc: 'A tiny crocheted takeaway coffee cup with a lid and a sleeve, on a steel ring. Shown in cream, tan and espresso. Made in any colour.',
+      images: ['img/mug-1.jpg', 'img/mug-2.jpg'] },
+    { id: 'key-ball', cat: 'keychains', name: 'Basketball Keychain', sizes: [{ n: 'Small', p: 230 }, { n: 'Big', p: 280 }],
+      desc: 'A little stuffed basketball with stitched black seams, on a steel ring. Available in two sizes. Shown in orange. Made in any colour.',
+      images: ['img/ball-1.jpg'] }
+  ];
+  var SWATCHES = [['Cream', '#f6efdc'], ['Butter', '#f1e58f'], ['Sunshine', '#f2d21b'], ['Gold', '#c9a24a'], ['Blush', '#e7c3b8'], ['Rose', '#e28fa0'], ['Terracotta', '#b8604f'], ['Wine', '#8e1b34'], ['Maroon', '#700000'], ['Mocha', '#a07c5b'], ['Chocolate', '#4a2a20'], ['Sage', '#9db08a'], ['Forest', '#2f5d3a'], ['Sky', '#8fb8d6'], ['Cobalt', '#2f62c8'], ['Navy', '#1f2f57'], ['Black', '#1a1a1a'], ['White', '#ffffff']];
+  var MAX_COLOURS = 3;
+
+  /* ===== Helpers ===== */
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var inr = function (n) { return '₹' + new Intl.NumberFormat('en-IN').format(n); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var waLink = function (text) { return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text); };
+  var byId = function (id) { return PRODUCTS.filter(function (p) { return p.id === id; })[0]; };
+  var pName = function (p) { return p.name + (p.variant ? ' (' + p.variant + ')' : ''); };
+  var catName = function (id) { var c = CATS.filter(function (x) { return x.id === id; })[0]; return c ? c.name : ''; };
+  var inCat = function (id) { return PRODUCTS.filter(function (p) { return p.cat === id; }); };
+  var isLight = function (hex) { var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255; return (r * 299 + g * 587 + b * 114) / 1000 > 150; };
+  var colourName = function (hex) { var f = SWATCHES.filter(function (s) { return s[1].toLowerCase() === hex.toLowerCase(); })[0]; return f ? f[0] : hex.toUpperCase(); };
+  function sizeObj(p, name) { return p.sizes.filter(function (s) { return s.n === name; })[0] || p.sizes[0]; }
+  function calc(p, size, exIds) {
+    var t = sizeObj(p, size).p;
+    (exIds || []).forEach(function (id) { var e = (p.extras || []).filter(function (x) { return x.id === id; })[0]; if (e) t += e.p; });
+    return t;
+  }
+  function fromPrice(p) {
+    var prices = p.sizes.map(function (s) { return s.p; }), min = Math.min.apply(null, prices), max = Math.max.apply(null, prices);
+    return (min === max ? '' : 'From ') + inr(min);
+  }
+  var toastTimer;
+  function toast(msg, actLabel, act) {
+    $('#toastMsg').textContent = msg;
+    var b = $('#toastAct');
+    if (actLabel) { b.hidden = false; b.textContent = actLabel; b.onclick = function () { $('#toast').hidden = true; act(); }; }
+    else { b.hidden = true; b.onclick = null; }
+    $('#toast').hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { $('#toast').hidden = true; }, 3800);
+  }
+
+  /* ===== Scroll progress ===== */
+  var prog = $('#progress'), ticking = false;
+  function updProgress() {
+    ticking = false;
+    var d = document.documentElement, max = d.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    prog.style.setProperty('--p', p.toFixed(4));
+    prog.classList.toggle('on', window.scrollY > 4);
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(updProgress); } }, { passive: true });
+  window.addEventListener('resize', updProgress);
+
+  /* ===== Reveal on scroll (only for content below the first screen) ===== */
+  var io = null;
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+  }
+  function scanReveal() {
+    if (!io || document.documentElement.classList.contains('rm')) return;
+    $$('[data-view]:not([hidden]) .section-head, [data-view]:not([hidden]) .card, [data-view]:not([hidden]) .cat-row, [data-view]:not([hidden]) .band, [data-view]:not([hidden]) .insta, [data-view]:not([hidden]) .contact-card, [data-view]:not([hidden]) .steps li').forEach(function (el) {
+      if (el.dataset.rv) return;
+      el.dataset.rv = '1';
+      var top = el.getBoundingClientRect().top;
+      if (top > window.innerHeight * 0.92) { el.classList.add('rv'); io.observe(el); }
+    });
+  }
+
+  /* ===== Routing ===== */
+  var ROUTES = ['home', 'products', 'custom', 'contact'];
+  function route() {
+    var h = location.hash.slice(1);
+    if (ROUTES.indexOf(h) < 0) h = 'home';
+    $$('[data-view]').forEach(function (el) { el.hidden = el.dataset.view !== h; });
+    $$('[data-nav]').forEach(function (a) { if (a.dataset.nav === h) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    window.scrollTo(0, 0);
+    setTimeout(function () { scanReveal(); updProgress(); }, 60);
+  }
+  window.addEventListener('hashchange', route);
+
+  /* ===== Cards, filters, home ===== */
+  function cardHTML(p) {
+    var alt = p.images[1] ? '<img class="alt" src="' + p.images[1] + '" alt="" loading="lazy">' : '';
+    return '<article class="card"><button class="card-open" data-open="' + p.id + '" aria-label="View ' + esc(pName(p)) + '">' +
+      '<span class="ph"><img src="' + p.images[0] + '" alt="' + esc(pName(p)) + '" loading="lazy">' + alt + '</span>' +
+      '<span class="card-row"><span><span class="nm">' + esc(p.name) + '</span>' + (p.variant ? '<span class="var">' + esc(p.variant) + '</span>' : '') + '</span><span class="price">' + fromPrice(p) + '</span></span></button>' +
+      '<button class="btn sm ghost" data-open="' + p.id + '">Choose &amp; add to cart</button></article>';
+  }
+  var filter = 'all';
+  function renderFilters() {
+    var h = '<button data-filter="all" aria-pressed="' + (filter === 'all') + '">All<span class="n">' + PRODUCTS.length + '</span></button>';
+    CATS.forEach(function (c) {
+      var n = inCat(c.id).length;
+      h += '<button data-filter="' + c.id + '" aria-pressed="' + (filter === c.id) + '">' + esc(c.name) + '<span class="n">' + (n || 'Soon') + '</span></button>';
+    });
+    $('#filters').innerHTML = h;
+  }
+  function renderProducts() {
+    var list = PRODUCTS.filter(function (p) { return filter === 'all' || p.cat === filter; });
+    var h = '';
+    if (list.length) h += '<div class="grid">' + list.map(cardHTML).join('') + '</div>';
+    else h += '<div class="soon"><h3>' + esc(catName(filter)) + ' are coming soon</h3><p>We are still crocheting and photographing this range. Have something in mind? Design it yourself and we will make it.</p><a class="btn" href="#custom">Start a custom order</a></div>';
+    if (filter === 'all') {
+      var soon = CATS.filter(function (c) { return !inCat(c.id).length; });
+      if (soon.length) h += '<div class="soon-list"><span>Coming soon</span>' + soon.map(function (c) { return '<span>' + esc(c.name) + '</span>'; }).join('') + '<a class="link-arrow" href="#custom">Request a custom piece</a></div>';
+    }
+    $('#productArea').innerHTML = h;
+    scanReveal();
+  }
+  function renderHome() {
+    $('#homeCats').innerHTML = CATS.map(function (c) {
+      var list = inCat(c.id);
+      var th = list.length ? '<img src="' + list[0].images[0] + '" alt="" loading="lazy">' : '<img class="ball" src="img/ball.png" alt="">';
+      return '<a class="cat-row" href="#products" data-gofilter="' + c.id + '"><span class="th-c">' + th + '</span><span class="cat-name">' + esc(c.name) + '</span><span class="cat-meta">' + (list.length ? list.length + (list.length === 1 ? ' piece' : ' pieces') : 'Coming soon') + '</span><span class="cat-arrow" aria-hidden="true">&rarr;</span></a>';
+    }).join('');
+    $('#heroNew').innerHTML = ['crescent', 'baby-set', 'mandala'].map(byId).filter(Boolean).map(function (p) { return '<button type="button" class="mini" data-open="' + p.id + '"><img src="' + esc(p.images[0]) + '" alt=""><span><b>' + esc(pName(p)) + '</b><small>' + fromPrice(p) + '</small></span></button>'; }).join('');
+    $('#homeFeatured').innerHTML = ['rose', 'noor', 'clutch', 'dusk'].map(byId).filter(Boolean).map(cardHTML).join('');
+    var words = ['Handmade', 'Made to order', 'Custom colours', 'Ready in two weeks', 'Crocheted stitch by stitch'], m = '';
+    for (var k = 0; k < 2; k++) words.forEach(function (w) { m += '<span>' + w + '</span><i></i>'; });
+    $('#marquee').innerHTML = m + m;
+  }
+
+  /* ===== Product modal ===== */
+  var M = null, lastFocus = null;
+  function openModal(id) {
+    var p = byId(id); if (!p) return;
+    M = { p: p, size: p.sizes[0].n, colors: [], note: '', extras: [], strap: p.straps ? p.straps[0] : '', qty: 1, img: 0 };
+    lastFocus = document.activeElement;
+    var h = '<button class="close-x" id="modalClose" aria-label="Close">&times;</button>';
+    h += '<div class="gallery"><div class="ph"><img id="mMain" src="' + p.images[0] + '" alt="' + esc(pName(p)) + '"></div><div class="thumbs">' +
+      p.images.map(function (src, i) { return '<button data-thumb="' + i + '" aria-label="Photo ' + (i + 1) + '"><img src="' + src + '" alt=""></button>'; }).join('') + '</div></div>';
+    h += '<div class="detail"><span class="eyebrow">' + esc(catName(p.cat)) + '</span><h2>' + esc(pName(p)) + '</h2><span class="price" id="mPrice"></span><p class="desc">' + esc(p.desc) + '</p>';
+    h += '<div class="opt"><div class="opt-head"><b>Size</b></div><div class="chips">' + p.sizes.map(function (s) { return '<button class="chip" data-msize="' + esc(s.n) + '">' + esc(s.n) + '<small>' + inr(s.p) + '</small></button>'; }).join('') + '</div></div>';
+    h += '<div class="opt"><div class="opt-head"><b>Colour</b><span id="mColLbl"></span></div><div class="swatches">' +
+      SWATCHES.map(function (s) { return '<button type="button" class="swatch" data-msw="' + s[1] + '"><i style="background:' + s[1] + ';--chk:' + (isLight(s[1]) ? '#700000' : '#fff') + '"></i>' + s[0] + '</button>'; }).join('') +
+      '</div><div class="pick-row"><input type="color" id="mPick" value="#700000" aria-label="Pick any shade"><button type="button" class="btn sm ghost" id="mAddCol">Add this shade</button><span>Up to ' + MAX_COLOURS + ' colours. Leave empty to match the photo.</span></div>' +
+      '<div style="margin-top:.8rem"><label class="l" for="mNote">Note (optional)</label><input class="field" id="mNote" placeholder="e.g. cream body with maroon handle, or the charms you want"></div></div>';
+    if (p.straps) h += '<div class="opt"><div class="opt-head"><b>' + esc(p.strapLabel || 'Strap') + '</b></div><div class="chips">' + p.straps.map(function (s) { return '<button class="chip" data-mstrap="' + esc(s) + '">' + esc(s) + '</button>'; }).join('') + '</div></div>';
+    if (p.extras) h += '<div class="opt"><div class="opt-head"><b>Optional</b></div><div class="chips">' + p.extras.map(function (e) { return '<button class="chip" data-mextra="' + e.id + '">' + esc(e.label) + '<small>+' + inr(e.p) + '</small></button>'; }).join('') + '</div></div>';
+    h += '<dl class="spec"><dt>Colour</dt><dd>Customisable</dd><dt>Made</dt><dd>' + LEAD_TIME + ', by hand</dd></dl>';
+    h += '<div class="buy"><div class="stepper"><button data-mq="-1" aria-label="Decrease quantity">&minus;</button><output id="mQty">1</output><button data-mq="1" aria-label="Increase quantity">+</button></div><button class="btn" id="mAdd">Add to cart</button></div>';
+    h += '<a class="link-arrow" style="align-self:flex-start" href="#custom" data-customise="' + p.id + '">Want a different size or an idea of your own?</a></div>';
+    $('#modalCard').innerHTML = h;
+    syncModal();
+    $('#modal').hidden = false; $('#modalScrim').hidden = false;
+    document.body.style.overflow = 'hidden';
+    $('#modalClose').focus();
+  }
+  function syncModal() {
+    var p = M.p;
+    $('#mMain').src = p.images[M.img];
+    $$('[data-thumb]').forEach(function (b) { b.setAttribute('aria-current', String(+b.dataset.thumb === M.img)); });
+    $$('[data-msize]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.msize === M.size)); });
+    $$('[data-msw]').forEach(function (b) { b.setAttribute('aria-pressed', String(M.colors.indexOf(b.dataset.msw) > -1)); });
+    $$('[data-mstrap]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mstrap === M.strap)); });
+    $$('[data-mextra]').forEach(function (b) { b.setAttribute('aria-pressed', String(M.extras.indexOf(b.dataset.mextra) > -1)); });
+    $('#mColLbl').textContent = M.colors.length ? M.colors.map(colourName).join(' + ') : 'As shown in the photo';
+    var unit = calc(p, M.size, M.extras);
+    $('#mPrice').textContent = inr(unit);
+    $('#mQty').textContent = M.qty;
+    $('#mAdd').textContent = 'Add to cart · ' + inr(unit * M.qty);
+  }
+  function closeModal() {
+    $('#modal').hidden = true; $('#modalScrim').hidden = true;
+    if ($('#drawer').hidden) document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  /* ===== Cart ===== */
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem('loom-cart-v2') || '[]'); } catch (e) { cart = []; }
+  cart = (Array.isArray(cart) ? cart : []).filter(function (i) { return i && byId(i.id) && i.qty > 0 && Array.isArray(i.colors) && Array.isArray(i.extras); });
+  function saveCart() { try { localStorage.setItem('loom-cart-v2', JSON.stringify(cart)); } catch (e) { } }
+  function keyOf(i) { return [i.id, i.size, i.colors.join(','), i.note, i.extras.join(','), i.strap].join('|'); }
+  function describe(i) {
+    var p = byId(i.id), parts = [];
+    if (p.sizes.length > 1) parts.push('Size: ' + i.size);
+    parts.push('Colour: ' + (i.colors.length ? i.colors.map(colourName).join(' + ') : 'as shown') + (i.note ? ' (' + i.note + ')' : ''));
+    if (i.strap) parts.push((p.strapLabel || 'Strap') + ': ' + i.strap);
+    i.extras.forEach(function (id) { var e = (p.extras || []).filter(function (x) { return x.id === id; })[0]; if (e) parts.push(e.label); });
+    return parts;
+  }
+  var unitOf = function (i) { return calc(byId(i.id), i.size, i.extras); };
+  var cartCount = function () { return cart.reduce(function (n, i) { return n + i.qty; }, 0); };
+  var cartTotal = function () { return cart.reduce(function (n, i) { return n + i.qty * unitOf(i); }, 0); };
+  function addToCart(item) {
+    item.key = keyOf(item);
+    var f = cart.filter(function (i) { return keyOf(i) === item.key; })[0];
+    if (f) f.qty += item.qty; else cart.push(item);
+    saveCart(); renderCart();
+    toast('Added to cart', 'View cart', openDrawer);
+  }
+  function renderCart() {
+    $('#cartCount').textContent = cartCount();
+    var has = cart.length > 0;
+    $('#cartFoot').hidden = !has;
+    if (!has) {
+      $('#cartItems').innerHTML = '<div class="empty"><h3>Your cart is empty</h3><p>Pick a piece you like and it will wait here.</p><p style="margin-top:1.4rem"><a class="btn" href="#products" data-closedrawer="1">Browse products</a></p></div>';
+      $('#cartTotals').innerHTML = '';
+    } else {
+      $('#cartItems').innerHTML = cart.map(function (i, ix) {
+        var p = byId(i.id);
+        return '<div class="line-item"><img src="' + p.images[0] + '" alt="">' +
+          '<div><h4>' + esc(pName(p)) + '</h4><div class="meta">' + describe(i).map(esc).join('<br>') + '</div>' +
+          '<div class="row"><div class="stepper"><button data-cdec="' + ix + '" aria-label="Decrease quantity">&minus;</button><output>' + i.qty + '</output><button data-cinc="' + ix + '" aria-label="Increase quantity">+</button></div><button class="rm-btn" data-crm="' + ix + '">Remove</button></div></div>' +
+          '<span class="price">' + inr(unitOf(i) * i.qty) + '</span></div>';
+      }).join('');
+      $('#cartTotals').innerHTML = '<div class="totals"><span>Subtotal</span><span class="price">' + inr(cartTotal()) + '</span></div>';
+    }
+    updateCheckout();
+  }
+  function orderMessage() {
+    var L = ['Hello Loom! I would like to place an order 🧶', '', 'Order:'];
+    cart.forEach(function (i, n) {
+      L.push((n + 1) + '. ' + pName(byId(i.id)) + ' x ' + i.qty + ' - ' + inr(unitOf(i) * i.qty));
+      describe(i).forEach(function (d) { L.push('   ' + d); });
+    });
+    L.push('', 'Subtotal: ' + inr(cartTotal()), '', 'Name: ' + $('#oName').value.trim());
+    var ph = $('#oPhone').value.trim(); if (ph) L.push('Phone: ' + ph);
+    var ad = $('#oAddr').value.trim(); if (ad) L.push('Delivery address: ' + ad);
+    var nt = $('#oNote').value.trim(); if (nt) L.push('Note: ' + nt);
+    L.push('', 'Please confirm availability, delivery charges and the ready date.');
+    return L.join('\n');
+  }
+  function updateCheckout() { $('#checkout').href = cart.length ? waLink(orderMessage()) : '#'; }
+  var drawerFocus = null;
+  function openDrawer() {
+    drawerFocus = document.activeElement; renderCart();
+    clearTimeout(toastTimer); $('#toast').hidden = true;
+    $('#drawer').hidden = false; $('#drawerScrim').hidden = false;
+    document.body.style.overflow = 'hidden'; $('#drawerClose').focus();
+  }
+  function closeDrawer() {
+    $('#drawer').hidden = true; $('#drawerScrim').hidden = true;
+    if ($('#modal').hidden) document.body.style.overflow = '';
+    if (drawerFocus && drawerFocus.focus) drawerFocus.focus();
+  }
+
+  /* ===== Custom order ===== */
+  var custom = { pid: '', size: '', colors: [], extras: [], strap: '', qty: 1 };
+  var OTHER_SIZES = ['Small', 'Medium', 'Large'];
+  function cProduct() { return custom.pid && custom.pid !== 'other' ? byId(custom.pid) : null; }
+  function renderCustomProducts() {
+    var h = '<div class="chips" role="group" aria-label="Choose a piece">' + PRODUCTS.map(function (p) { return '<button type="button" class="chip" data-cprod="' + p.id + '" aria-pressed="' + (custom.pid === p.id) + '">' + esc(pName(p)) + '</button>'; }).join('') +
+      '<button type="button" class="chip" data-cprod="other" aria-pressed="' + (custom.pid === 'other') + '">Something else</button></div>';
+    $('#cProducts').innerHTML = h;
+    $('#cOtherWrap').hidden = custom.pid !== 'other';
+  }
+  function renderCustomSizes() {
+    var p = cProduct(), sizes = p ? p.sizes : OTHER_SIZES.map(function (n) { return { n: n }; });
+    if (!sizes.some(function (s) { return s.n === custom.size; })) custom.size = (p && sizes.length === 1) ? sizes[0].n : '';
+    $('#cSizes').innerHTML = sizes.map(function (s) { return '<button type="button" class="chip" data-csize="' + esc(s.n) + '" aria-pressed="' + (custom.size === s.n) + '">' + esc(s.n) + (s.p ? '<small>' + inr(s.p) + '</small>' : '') + '</button>'; }).join('');
+    var x = '';
+    if (p && p.straps) x += '<div class="group-t">' + esc(p.strapLabel || 'Strap') + '</div><div class="chips">' + p.straps.map(function (s) { return '<button type="button" class="chip" data-cstrap="' + esc(s) + '" aria-pressed="' + (custom.strap === s) + '">' + esc(s) + '</button>'; }).join('') + '</div>';
+    if (p && p.extras) x += '<div class="group-t">Optional</div><div class="chips">' + p.extras.map(function (e) { return '<button type="button" class="chip" data-cextra="' + e.id + '" aria-pressed="' + (custom.extras.indexOf(e.id) > -1) + '">' + esc(e.label) + '<small>+' + inr(e.p) + '</small></button>'; }).join('') + '</div>';
+    $('#cExtras').innerHTML = x;
+  }
+  function renderCSwatches() {
+    $('#cSwatches').innerHTML = SWATCHES.map(function (s) { return '<button type="button" class="swatch" data-cswatch="' + s[1] + '" aria-pressed="' + (custom.colors.indexOf(s[1]) > -1) + '"><i style="background:' + s[1] + ';--chk:' + (isLight(s[1]) ? '#700000' : '#fff') + '"></i>' + s[0] + '</button>'; }).join('');
+    $('#cChosen').innerHTML = custom.colors.length ? custom.colors.map(function (h) { return '<span class="tag"><i style="background:' + h + '"></i>' + esc(colourName(h)) + '<button type="button" data-rmcolour="' + h + '" aria-label="Remove ' + esc(colourName(h)) + '">&times;</button></span>'; }).join('') : '<span class="small">Pick up to ' + MAX_COLOURS + ' colours.</span>';
+  }
+  function customData() {
+    var p = cProduct();
+    var exact = $('#cExact').value.trim();
+    var size = custom.size + (exact ? (custom.size ? ' (exact: ' + exact + ')' : 'exact: ' + exact) : '');
+    var extras = [];
+    if (p) custom.extras.forEach(function (id) { var e = (p.extras || []).filter(function (x) { return x.id === id; })[0]; if (e) extras.push(e.label); });
+    return { p: p, product: p ? pName(p) : $('#cOther').value.trim(), size: size, colours: custom.colors.map(colourName).join(', '), colourNote: $('#cColourNote').value.trim(), strap: p && p.straps ? custom.strap : '', extras: extras, qty: custom.qty, name: $('#cName').value.trim(), notes: $('#cNotes').value.trim() };
+  }
+  function customMissing(d) {
+    var m = [];
+    if (!d.product) m.push(custom.pid === 'other' ? 'Describe what you would like made' : 'Choose a piece');
+    if (!d.size) m.push('Pick a size or add measurements');
+    if (!d.colours && !d.colourNote) m.push('Pick at least one colour');
+    if (d.p && d.p.straps && !d.strap) m.push('Choose a ' + (d.p.strapLabel || 'strap').toLowerCase());
+    if (!d.name) m.push('Add your name');
+    return m;
+  }
+  function customMessage(d) {
+    var L = ['Hello Loom! I would like to place a custom order 🧶', '', 'Piece: ' + d.product, 'Size: ' + d.size];
+    L.push('Colours: ' + d.colours + (d.colourNote ? (d.colours ? ' - ' : '') + d.colourNote : ''));
+    if (d.strap) L.push(((d.p && d.p.strapLabel) || 'Strap') + ': ' + d.strap);
+    if (d.extras.length) L.push('Extras: ' + d.extras.join(', '));
+    L.push('Quantity: ' + d.qty);
+    if (d.p && custom.size && d.p.sizes.some(function (s) { return s.n === custom.size; })) L.push('Estimated: ' + inr(calc(d.p, custom.size, custom.extras) * d.qty));
+    if (d.notes) L.push('Notes: ' + d.notes);
+    L.push('Name: ' + d.name, '', 'I understand custom pieces are made to order and take about 2 weeks. Could you confirm the price?');
+    return L.join('\n');
+  }
+  var showMiss = false;
+  function renderPreview() {
+    var p = cProduct(), h;
+    if (p) h = '<img class="pv" src="' + esc(p.images[0]) + '" alt="' + esc(pName(p)) + '"><span class="pv-n">' + esc(pName(p)) + '</span>';
+    else h = '<div class="pv-empty"><img src="img/ball.png" alt="">' + (custom.pid === 'other' ? 'Your own idea' : 'Choose a piece to preview it') + '</div>';
+    $$('.c-prev').forEach(function (n) { if (n.dataset.k !== custom.pid) { n.dataset.k = custom.pid; n.innerHTML = h; } });
+  }
+  function updateSummary() {
+    renderPreview();
+    var d = customData();
+    var row = function (k, v) { return '<dt>' + k + '</dt><dd' + (v ? '' : ' class="none"') + '>' + (v ? esc(v) : 'Not chosen yet') + '</dd>'; };
+    var col = d.colours + (d.colourNote ? (d.colours ? ', ' : '') + d.colourNote : '');
+    $('#cSummary').innerHTML = row('Piece', d.product) + row('Size', d.size) + row('Colours', col) + (d.p && d.p.straps ? row(d.p.strapLabel || 'Strap', d.strap) : '') + (d.extras.length ? row('Extras', d.extras.join(', ')) : '') + '<dt>Qty</dt><dd>' + d.qty + '</dd>' + row('Name', d.name);
+    var hasEst = d.p && custom.size && d.p.sizes.some(function (s) { return s.n === custom.size; });
+    $('#cEst').hidden = !hasEst;
+    if (hasEst) $('#cEstVal').textContent = inr(calc(d.p, custom.size, custom.extras) * d.qty);
+    var miss = customMissing(d), a = $('#cSend');
+    if (miss.length) { a.setAttribute('aria-disabled', 'true'); a.href = '#custom'; } else { a.removeAttribute('aria-disabled'); a.href = waLink(customMessage(d)); }
+    $('#cMissing').innerHTML = showMiss && miss.length ? '<p class="err">Still needed:</p><ul class="missing err">' + miss.map(function (m) { return '<li>' + esc(m) + '</li>'; }).join('') + '</ul>' : '';
+  }
+
+  /* ===== Events ===== */
+  document.addEventListener('click', function (e) {
+    var t = e.target, el;
+    if ((el = t.closest('[data-open]'))) { openModal(el.dataset.open); return; }
+    if ((el = t.closest('[data-filter]'))) { filter = el.dataset.filter; renderFilters(); renderProducts(); return; }
+    if ((el = t.closest('[data-gofilter]'))) { filter = el.dataset.gofilter; renderFilters(); renderProducts(); return; }
+    if (M && (el = t.closest('[data-thumb]'))) { M.img = +el.dataset.thumb; syncModal(); return; }
+    if (M && (el = t.closest('[data-msize]'))) { M.size = el.dataset.msize; syncModal(); return; }
+    if (M && (el = t.closest('[data-msw]'))) {
+      var h = el.dataset.msw, ix = M.colors.indexOf(h);
+      if (ix > -1) M.colors.splice(ix, 1); else if (M.colors.length < MAX_COLOURS) M.colors.push(h); else toast('You can pick up to ' + MAX_COLOURS + ' colours');
+      syncModal(); return;
+    }
+    if (M && t.closest('#mAddCol')) {
+      var hx = $('#mPick').value.toLowerCase();
+      if (M.colors.indexOf(hx) < 0) { if (M.colors.length < MAX_COLOURS) M.colors.push(hx); else toast('You can pick up to ' + MAX_COLOURS + ' colours'); }
+      syncModal(); return;
+    }
+    if (M && (el = t.closest('[data-mstrap]'))) { M.strap = el.dataset.mstrap; syncModal(); return; }
+    if (M && (el = t.closest('[data-mextra]'))) { var id = el.dataset.mextra, k = M.extras.indexOf(id); if (k > -1) M.extras.splice(k, 1); else M.extras.push(id); syncModal(); return; }
+    if (M && (el = t.closest('[data-mq]'))) { M.qty = Math.max(1, Math.min(20, M.qty + +el.dataset.mq)); syncModal(); return; }
+    if (M && t.closest('#mAdd')) {
+      var note = $('#mNote').value.trim();
+      addToCart({ id: M.p.id, size: M.size, colors: M.colors.slice(), note: note, extras: M.extras.slice(), strap: M.strap, qty: M.qty });
+      closeModal(); return;
+    }
+    if ((el = t.closest('[data-customise]'))) { custom.pid = el.dataset.customise; custom.size = ''; custom.extras = []; custom.strap = (byId(custom.pid).straps || [''])[0]; renderCustomProducts(); renderCustomSizes(); updateSummary(); closeModal(); return; }
+    if (t.closest('#modalClose') || t.id === 'modalScrim') { closeModal(); return; }
+    if (t.closest('#modal') && !t.closest('#modalCard')) { closeModal(); return; }
+    if (t.closest('#cartBtn')) { openDrawer(); return; }
+    if (t.closest('#drawerClose') || t.id === 'drawerScrim' || t.closest('[data-closedrawer]')) { closeDrawer(); return; }
+    if ((el = t.closest('[data-cinc]'))) { var a = cart[+el.dataset.cinc]; if (a && a.qty < 20) a.qty++; saveCart(); renderCart(); return; }
+    if ((el = t.closest('[data-cdec]'))) { var b = cart[+el.dataset.cdec]; if (b) { b.qty--; if (b.qty < 1) cart.splice(+el.dataset.cdec, 1); } saveCart(); renderCart(); return; }
+    if ((el = t.closest('[data-crm]'))) { cart.splice(+el.dataset.crm, 1); saveCart(); renderCart(); return; }
+    /* custom page */
+    if ((el = t.closest('[data-cprod]'))) {
+      custom.pid = el.dataset.cprod; custom.size = ''; custom.extras = [];
+      var pp = cProduct(); custom.strap = pp && pp.straps ? pp.straps[0] : '';
+      renderCustomProducts(); renderCustomSizes(); updateSummary(); return;
+    }
+    if ((el = t.closest('[data-csize]'))) { custom.size = el.dataset.csize; renderCustomSizes(); updateSummary(); return; }
+    if ((el = t.closest('[data-cstrap]'))) { custom.strap = el.dataset.cstrap; renderCustomSizes(); updateSummary(); return; }
+    if ((el = t.closest('[data-cextra]'))) { var cid = el.dataset.cextra, ci = custom.extras.indexOf(cid); if (ci > -1) custom.extras.splice(ci, 1); else custom.extras.push(cid); renderCustomSizes(); updateSummary(); return; }
+    if ((el = t.closest('[data-cswatch]'))) {
+      var hh = el.dataset.cswatch, xi = custom.colors.indexOf(hh);
+      if (xi > -1) custom.colors.splice(xi, 1); else if (custom.colors.length < MAX_COLOURS) custom.colors.push(hh); else toast('You can pick up to ' + MAX_COLOURS + ' colours');
+      renderCSwatches(); updateSummary(); return;
+    }
+    if ((el = t.closest('[data-rmcolour]'))) { custom.colors = custom.colors.filter(function (c) { return c !== el.dataset.rmcolour; }); renderCSwatches(); updateSummary(); return; }
+    if (t.closest('#cAddColour')) {
+      var hex = $('#cPick').value.toLowerCase();
+      if (custom.colors.indexOf(hex) > -1) return;
+      if (custom.colors.length >= MAX_COLOURS) { toast('You can pick up to ' + MAX_COLOURS + ' colours'); return; }
+      custom.colors.push(hex); renderCSwatches(); updateSummary(); return;
+    }
+    if ((el = t.closest('[data-cqty]'))) { custom.qty = Math.max(1, Math.min(50, custom.qty + +el.dataset.cqty)); $('#cQtyVal').textContent = custom.qty; updateSummary(); return; }
+    if (t.closest('#cSend')) {
+      var d = customData(), miss = customMissing(d);
+      if (miss.length) { e.preventDefault(); showMiss = true; updateSummary(); return; }
+      toast('Opening WhatsApp. Press send there to share your order.'); return;
+    }
+    /* contact */
+    if (t.closest('#copyEmail')) {
+      var done = function () { toast('Email address copied'); };
+      var fb = function () { var r = document.createRange(); r.selectNodeContents($('#emailVal')); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); toast('Address selected. Press copy to save it.'); };
+      try { navigator.clipboard.writeText(EMAIL).then(done, fb); } catch (err) { fb(); }
+      return;
+    }
+    if (t.closest('#checkout')) {
+      var er = $('#oErr');
+      if (!cart.length) { e.preventDefault(); return; }
+      if (!$('#oName').value.trim() || !$('#oAddr').value.trim()) {
+        e.preventDefault(); er.hidden = false; er.textContent = 'Please add your name and delivery address first.';
+        ($('#oName').value.trim() ? $('#oAddr') : $('#oName')).focus(); return;
+      }
+      er.hidden = true; updateCheckout(); toast('Opening WhatsApp. Press send there to share your order.');
+    }
+  });
+  document.addEventListener('input', function (e) {
+    var id = e.target.id;
+    if (['oName', 'oPhone', 'oAddr', 'oNote'].indexOf(id) > -1) { updateCheckout(); if (e.target.value.trim()) $('#oErr').hidden = true; }
+    if (['cOther', 'cExact', 'cColourNote', 'cName', 'cNotes'].indexOf(id) > -1) updateSummary();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { if (!$('#modal').hidden) closeModal(); else if (!$('#drawer').hidden) closeDrawer(); }
+  });
+
+  /* ===== Init ===== */
+  var waHello = 'Hello Loom! I found your website and would like to know more about your handmade pieces 🧶';
+  $('#waFab').href = waLink(waHello);
+  $('#contactWa').href = waLink(waHello);
+  renderHome(); renderFilters(); renderProducts();
+  renderCustomProducts(); renderCustomSizes(); renderCSwatches(); updateSummary();
+  renderCart(); route(); updProgress();
+})();
+</script>
+
+</body>
+</html>
